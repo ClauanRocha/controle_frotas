@@ -1,0 +1,198 @@
+/* Estilos Gerais */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: Arial, sans-serif;
+    background-color: #f0f2f5;
+    color: #333;
+}
+
+.container {
+    display: flex;
+    height: 100vh;
+    overflow: hidden;
+}
+
+/* Barra Lateral */
+.sidebar {
+    width: 250px;
+    background-color: #252424;
+    color: #ecf0f1;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    position: fixed;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    padding: 20px;
+}
+
+.sidebar-header h2 {
+    font-size: 18px;
+    margin-bottom: 10px;
+}
+
+.sidebar hr {
+    border: 0;
+    height: 1px;
+    background: #797878;
+    margin-bottom: 20px;
+}
+
+.sidebar-menu {
+    list-style: none;
+    padding: 0;
+    flex-grow: 1;
+}
+
+.sidebar-menu li {
+    margin-bottom: 15px;
+}
+
+.sidebar-menu a {
+    color: #ecf0f1;
+    text-decoration: none;
+    font-size: 16px;
+    display: block;
+    padding: 10px;
+    border-radius: 4px;
+    transition: background 0.3s;
+}
+
+.sidebar-menu a:hover {
+    background-color: #A6A6A6;
+}
+
+.sidebar-footer a {
+    color: #fcfcfc;
+    text-decoration: none;
+    font-size: 16px;
+    display: block;
+    text-align: center;
+    padding: 10px;
+    border-radius: 4px;
+    background-color: #FF261E;
+    transition: background 0.3s;
+}
+
+.sidebar-footer a:hover {
+    background-color: #e74c3c;
+}
+
+/* Conteúdo Principal */
+.main-content {
+    margin-left: 250px;
+    padding: 40px;
+    width: calc(100% - 250px);
+    overflow-y: auto;
+}
+
+.main-content h1 {
+    font-size: 24px;
+    margin-bottom: 20px;
+}
+
+.main-content p {
+    font-size: 18px;
+    margin-bottom: 30px;
+}
+
+/* Gráficos */
+.charts {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr); /* Dois gráficos por linha */
+    grid-gap: 20px;
+}
+
+.chart-box {
+    background-color: #fff;
+    border-radius: 8px;
+    padding: 20px;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.chart-box canvas {
+    width: 100% !important;
+    max-height: 300px; /* Reduzido para ajustar melhor */
+}
+table th, table td {
+    padding: 16px; /* Ajuste de padding para diminuir o espaço entre as linhas */
+    text-align: left;
+    border-bottom: 0px solid rgba(255, 255, 255, 0.1); /* Linhas brancas com opacidade */
+    width: 22%;
+}
+
+table th {
+    background-color: #303030; /* Vermelho para cabeçalho */
+    color: #FFFFFF;
+}
+
+tbody tr:nth-child(even) {
+    background-color: #f2f2f2a4; /* Fundo cinza claro para linhas pares */
+    color: #000000; /* Texto preto */
+}
+
+tbody tr:nth-child(odd) {
+    background-color: #b4b4b4; /* Fundo cinza mais escuro para linhas ímpares */
+    color: #000000; /* Texto preto */
+}
+
+thead{
+    width: 100%;
+}
+.main-content h2 {
+    margin-top: 20px;
+}
+/* Estilo para o formulário de cadastro */
+.form-cadastro {
+    max-width: 600px; /* Ajuste a largura máxima do formulário */
+    margin: 0 auto; /* Centraliza o formulário na página */
+    padding: 20px; /* Adiciona um padding interno ao formulário */
+    background-color: #fff; /* Define a cor de fundo do formulário */
+    border-radius: 8px; /* Adiciona bordas arredondadas ao formulário */
+    box-shadow: 3px 0px 4px 13px rgba(0, 0, 0, 0.1); /* Adiciona sombra ao formulário */
+}
+
+.form-group {
+    margin-bottom: 15px; /* Espaçamento entre os grupos de formulário */
+}
+
+.form-group label {
+    display: block; /* Faz o label ocupar toda a largura do grupo */
+    font-size: 16px; /* Define o tamanho da fonte do label */
+    margin-bottom: 5px; /* Espaçamento entre o label e o input */
+    color: #333; /* Define a cor do texto do label */
+}
+
+.form-group input {
+    width: 100%; /* Faz o input ocupar toda a largura do grupo */
+    padding: 10px; /* Adiciona padding interno ao input */
+    border: 1px solid #ccc; /* Define a cor da borda do input */
+    border-radius: 4px; /* Adiciona bordas arredondadas ao input */
+    font-size: 16px; /* Define o tamanho da fonte do input */
+    color: #333; /* Define a cor do texto do input */
+}
+
+.btn-submit {
+    display: inline-block;
+    padding: 10px 20px; /* Adiciona padding interno ao botão */
+    font-size: 16px; /* Define o tamanho da fonte do botão */
+    color: #fff; /* Define a cor do texto do botão */
+    background-color: #FF261E; /* Define a cor de fundo do botão */
+    border: none; /* Remove a borda padrão do botão */
+    border-radius: 4px; /* Adiciona bordas arredondadas ao botão */
+    cursor: pointer; /* Muda o cursor para pointer ao passar sobre o botão */
+    transition: background 0.3s; /* Adiciona uma transição suave na cor de fundo */
+}
+
+.btn-submit:hover {
+    background-color: #e74c3c; /* Muda a cor de fundo ao passar o mouse sobre o botão */
+}

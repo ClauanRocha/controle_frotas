@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Perfil - Frotas de Caminhão</title>
+    <link rel="stylesheet" href="/css/perfil.css">
+</head>
+<body>
+    <div class="profile-container">
+        <h2>Perfil de <%= user.username %></h2>
+        <form action="/perfil" method="POST">
+            <label for="username">Nome de Usuário</label>
+            <input type="text" id="username" name="username" value="<%= user.username %>" required>
+
+            <label for="dtnasc">Data de Nascimento</label>
+            <input type="date" id="dtnasc" name="dtnasc" value="<%= user.dtnasc %>" required>
+
+            <label for="numcnh">CNH</label>
+            <input type="text" id="numcnh" name="numcnh" value="<%= user.numcnh %>" required>
+
+            <label for="password">Nova Senha</label>
+            <input type="password" id="password" name="password" placeholder="Digite a nova senha">
+
+            <button type="submit">Atualizar Perfil</button>
+        </form>
+        <button onclick="window.location.href='/home'">Voltar</button>
+    </div>
+
+    <div class="footer">
+        <p>2024 © Todos os direitos reservados <br>
+        <strong>Autoamerica Ltda</strong> 
+        <a href="https://chamados.autoamerica.com.br:8082/EquipeTI/index.html" target="_blank">
+            <img src="img/logoticerta.png" alt="Logo Autoamerica" class="logo" width="20px">
+        </a>
+        </p>
+    </div>
+</body>
+</html>

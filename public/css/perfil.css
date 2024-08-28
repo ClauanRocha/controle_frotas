@@ -1,0 +1,75 @@
+body {
+    font-family: Arial, sans-serif;
+    background-color: #303030;
+    color: #fff;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    min-height: 100vh;
+    margin: 0;
+}
+
+.profile-container {
+    background-color: #424242;
+    padding: 20px;
+    border-radius: 10px;
+    width: 300px;
+}
+
+.profile-container h2 {
+    text-align: center;
+    margin-bottom: 20px;
+}
+
+.profile-container label {
+    display: block;
+    margin-bottom: 5px;
+}
+
+.profile-container input[type="text"],
+.profile-container input[type="password"] {
+    width: 100%;
+    padding: 10px;
+    margin-bottom: 15px;
+    border: none;
+    border-radius: 5px;
+}
+
+.profile-container button {
+    display: block;
+    width: 200px;
+    padding: 10px;
+    margin: 10px 0;
+    background-color: #FF261E;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    font-size: 16px;
+    cursor: pointer;
+    text-align: center;
+}
+
+.profile-container button:hover {
+    background-color: #f3e564;
+    color: black;
+}
+
+.footer {
+    text-align: center;
+    padding: 10px 0;
+    background-color: #303030;
+    color: white;
+    font-size: 14px;
+    width: 100%;
+    margin-top: auto;
+}
+
+.footer a {
+    color: white;
+    text-decoration: none;
+}
+
+.footer a:hover {
+    text-decoration: underline;
+}

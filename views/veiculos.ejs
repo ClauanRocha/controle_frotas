@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cadastro de Veículos - Frotas de Caminhão</title>
+    <link rel="stylesheet" href="/css/veiculos.css">
+</head>
+<body>
+    <div class="container">
+        <!-- Barra Lateral -->
+        <div class="sidebar">
+            <div class="sidebar-header">
+                <h2>Bem-vindo, <%= user.username %></h2>
+                <hr>
+            </div>
+            <ul class="sidebar-menu">
+                <li><a href="/frota" onclick="loadContent('/frota')">Inicio</a></li>
+                <li><a href="/frota/motoristas" onclick="loadContent('/frota/motoristas')">Cadastro de Motorista</a></li>
+                <li><a href="/frota/consmoto" onclick="loadContent('/frota/consmoto')">Consultar Motorista</a></li>
+                <li><a href="/frota/veiculos" onclick="loadContent('/frota/veiculos')">Cadastro de Veículo</a></li>
+                <li><a href="/frota/informativo" onclick="loadContent('/frota/informativo')">Informativo Geral</a></li>
+                <li><a href="/frota/rastreadores" onclick="loadContent('/frota/rastreadores')">Rastreadores</a></li>
+            </ul>
+            <div class="sidebar-footer">
+                <a href="/logout">Sair</a>
+            </div>
+            <div class="footer">
+                <p><strong> Autoamerica Ltda</strong> 
+                <a href="https://chamados.autoamerica.com.br:8082/EquipeTI/index.html" target="_blank">
+                    <img src="img/logoticerta.png" alt="Logo Autoamerica" class="logo" width="20px">
+                </a>
+                </p>
+            </div> 
+        </div>
+        <!-- Conteúdo Principal -->
+        <div class="main-content">
+            <h1>Cadastro de Veículos</h1>
+            
+            <!-- Formulário de Cadastro -->
+            <form action="/frota/veiculos" method="POST" class="form-cadastro">
+                <div class="form-group">
+                    <label for="modelo">Modelo:</label>
+                    <input type="text" id="modelo" name="modelo" required>
+                </div>
+                <div class="form-group">
+                    <label for="placa">Placa:</label>
+                    <input type="text" id="placa" name="placa" required>
+                </div>
+                <div class="form-group">
+                    <label for="ano">Ano:</label>
+                    <input type="number" id="ano" name="ano" required>
+                </div>
+                <div class="form-group">
+                    <label for="cor">Cor:</label>
+                    <input type="text" id="cor" name="cor" required>
+                </div>
+                <button type="submit" class="btn-submit">Cadastrar Veículo</button>
+            </form>
+
+            <!-- Tabela de Veículos Cadastrados -->
+            <table class="table-veiculos">
+            <h2>Veículos Cadastrados</h2>
+                <thead>
+                    <tr>
+                        <th>Modelo</th>
+                        <th>Placa</th>
+                        <th>Ano</th>
+                        <th>Cor</th>
+                        <th>Ações</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <% veiculos.forEach(veiculo => { %>
+                        <tr>
+                            <td><%= veiculo.modelo %></td>
+                            <td><%= veiculo.placa %></td>
+                            <td><%= veiculo.ano %></td>
+                            <td><%= veiculo.cor %></td>
+                            <td>
+                                <a href="/frota/veiculos/edit/<%= veiculo.id %>" class="btn-edit">Editar</a>
+                                <a href="/frota/veiculos/delete/<%= veiculo.id %>" class="btn-delete">Excluir</a>
+                            </td>
+                        </tr>
+                    <% }) %>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</body>
+</html>

@@ -1,0 +1,125 @@
+/* Estilos Gerais */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: Arial, sans-serif;
+    background-color: #f0f2f5;
+    color: #333;
+}
+
+.container {
+    display: flex;
+    height: 100vh;
+    overflow: hidden;
+}
+
+/* Barra Lateral */
+.sidebar {
+    width: 250px;
+    background-color: #252424;
+    color: #ecf0f1;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    position: fixed;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    padding: 20px;
+}
+
+.sidebar-header h2 {
+    font-size: 18px;
+    margin-bottom: 10px;
+}
+
+.sidebar hr {
+    border: 0;
+    height: 1px;
+    background: #797878;
+    margin-bottom: 20px;
+}
+
+.sidebar-menu {
+    list-style: none;
+    padding: 0;
+    flex-grow: 1;
+}
+
+.sidebar-menu li {
+    margin-bottom: 15px;
+}
+
+.sidebar-menu a {
+    color: #ecf0f1;
+    text-decoration: none;
+    font-size: 16px;
+    display: block;
+    padding: 10px;
+    border-radius: 4px;
+    transition: background 0.3s;
+}
+
+.sidebar-menu a:hover {
+    background-color: #A6A6A6;
+}
+
+.sidebar-footer a {
+    color: #fcfcfc;
+    text-decoration: none;
+    font-size: 16px;
+    display: block;
+    text-align: center;
+    padding: 10px;
+    border-radius: 4px;
+    background-color: #FF261E;
+    transition: background 0.3s;
+}
+
+.sidebar-footer a:hover {
+    background-color: #e74c3c;
+}
+
+/* Conteúdo Principal */
+.main-content {
+    margin-left: 250px;
+    padding: 40px;
+    width: calc(100% - 250px);
+    overflow-y: auto;
+}
+
+.main-content h1 {
+    font-size: 24px;
+    margin-bottom: 20px;
+}
+
+.main-content p {
+    font-size: 18px;
+    margin-bottom: 30px;
+}
+
+/* Gráficos */
+.charts {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr); /* Dois gráficos por linha */
+    grid-gap: 20px;
+}
+
+.chart-box {
+    background-color: #fff;
+    border-radius: 8px;
+    padding: 20px;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.chart-box canvas {
+    width: 100% !important;
+    max-height: 300px; /* Reduzido para ajustar melhor */
+}

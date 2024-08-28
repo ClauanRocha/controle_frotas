@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Check-out - Frotas de Caminhão</title>
+    <link rel="stylesheet" href="/css/motoristas.css">
+</head> 
+<body>
+<div>
+    <!-- Barra Lateral -->
+    <div class="sidebar">
+        <div class="sidebar-header">
+            <h2>Bem-vindo, <%= user.username %></h2>
+            <hr>
+        </div>
+        <ul class="sidebar-menu">
+            <li><a href="/frota" onclick="loadContent('/frota')">Inicio</a></li>
+            <li><a href="/frota/motoristas" onclick="loadContent('/frota/motoristas')">Cadastro de Motorista</a></li>
+            <li><a href="/frota/motoristas" onclick="loadContent('/frota/consmoto')">Consultar Motorista</a></li>
+            <li><a href="/frota/veiculos" onclick="loadContent('/frota/veiculos')">Cadastro de Veículo</a></li>
+            <li><a href="/frota/informativo" onclick="loadContent('/frota/informativo')">Informativo Geral</a></li>
+            <li><a href="/frota/rastreadores" onclick="loadContent('/frota/rastreadores')">Rastreadores</a></li>
+        </ul>
+        <div class="sidebar-footer">
+            <a href="/logout">Sair</a>
+        </div>
+        <div class="footer">
+            <p><strong> Autoamerica Ltda</strong> 
+            <a href="https://chamados.autoamerica.com.br:8082/EquipeTI/index.html" target="_blank">
+                <img src="img/logoticerta.png" alt="Logo Autoamerica" class="logo" width="20px">
+            </a>
+            </p>
+        </div> 
+    </div>
+    <main>
+        <form action="/motoristas" method="POST">
+            <label for="moto_nome">Nome do Motorista:</label>
+            <input type="text" id="moto_nome" name="moto_nome" required>
+
+            <label for="moto_tel">Telefone:</label>
+            <input type="tel" id="moto_tel" name="moto_tel" required>
+
+            <label for="moto_nasc">Data de Nascimento:</label>
+            <input type="date" id="moto_nasc" name="moto_nasc" required>
+
+            <label for="moto_cnh">CNH:</label>
+            <input type="text" id="moto_cnh" name="moto_cnh" required>
+
+            <label for="moto_antcri">Antecedentes Criminais:</label>
+            <input type="text" id="moto_antcri" name="moto_antcri" required>
+
+            <label for="moto_ear">EAR (Exerce Atividade Remunerada):</label>
+            <input type="checkbox" id="moto_ear" name="moto_ear">
+
+            <label for="placa_vec">Placa do Veículo:</label>
+            <input type="text" id="placa_vec" name="placa_vec" required>
+
+            <label for="moto_traj">Principal Trajeto:</label>
+            <input type="text" id="moto_traj" name="moto_traj" required>
+
+            <button type="submit">Enviar</button>
+            <button type="submit">Enviar</button>
+        </form>
+    </main>
+</div>
+
+
+</body>
+</html>

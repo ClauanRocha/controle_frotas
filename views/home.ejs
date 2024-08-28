@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Início - Frotas de Caminhão</title>
+    <link rel="stylesheet" href="/css/home.css">
+    <link rel="icon" href="https://img.icons8.com/pastel-glyph/64/truck--v1.png" type="image/png">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <div class="user-info">
+                <h2>Bem-vindo, <%= user.username %>!</h2>
+            </div>
+            <div class="user-actions">
+                <button onclick="window.location.href='/perfil'">Perfil</button>
+                <button onclick="window.location.href='/logout'">Sair</button>
+            </div>
+        </div>
+        <div class="menu">
+            <button onclick="window.location.href='/checkin'">Check-in</button>
+            <button onclick="window.location.href='/checkout'">Check-out</button>   
+            <button onclick="window.location.href='/abastecimento'">Abastecimento</button>         
+        </div>
+        <div class="content">
+            <div class="checkins">
+                <h3><i class="fas fa-calendar-check"></i> Check-ins Abertos</h3>
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Data/Hora </th>
+                            <th>KM </th>
+                            <th>Status</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <% checkins.forEach(checkin => { 
+                            const checkinDate = new Date(checkin.checkin_date);
+                            const day = checkinDate.getDate().toString().padStart(2, '0'); 
+                            const month = (checkinDate.getMonth() + 1).toString().padStart(2, '0'); 
+                            const year = checkinDate.getFullYear(); 
+                            const status = Number(checkin.status); // Converte o status para número
+                        %>
+                            <tr>
+                                <td><%= `${day}/${month}/${year}` %></td>
+                                <td><%= checkin.km %></td>
+                                <td><%= status === 1 ? 'Em Aberto' : 'Fechado' %></td>
+                            </tr>
+                        <% }) %>
+                    </tbody>
+                </table>
+            </div>
+            
+            <div class="indicators">
+                <h3><i class="fas fa-tachometer-alt"></i> Indicadores do Motorista</h3>
+                <div class="indicator1">
+                    <h4><i class="fas fa-road"></i> KM Rodado</h4>
+                    <p><%= totalKm %> km</p>
+                </div>
+                <div class="indicator2">
+                    <h4><i class="fas fa-flag-checkered"></i> Viagens Concluídas</h4>
+                    <p id="totalCheckouts">Carregando...</p>
+                </div>
+            </div>
+        </div>
+        <div class="footer">
+            <p>2024 © Todos os direitos reservados <br>
+            <strong> Autoamerica Ltda</strong> 
+            <a href="https://chamados.autoamerica.com.br:8082/EquipeTI/index.html" target="_blank">
+                <img src="img/logoticerta.png" alt="Logo Autoamerica" class="logo" width="20px">
+            </a>
+            </p>
+        </div> 
+    </div>
+    <script>
+        // Função para buscar a contagem de check-outs e atualizar a interface
+        function updateCheckoutsCount() {
+            fetch('/checkouts-count')
+                .then(response => response.json())
+                .then(data => {
+                    document.getElementById('totalCheckouts').textContent = data.totalCheckouts;
+                })
+                .catch(error => {
+                    console.error('Erro ao carregar contagem de check-outs:', error);
+                    document.getElementById('totalCheckouts').textContent = 'Erro ao carregar dados';
+                });
+        }
+
+        // Atualiza a contagem de check-outs quando a página carrega
+        window.onload = function() {
+            updateCheckoutsCount();
+        };
+    </script>
+</body>
+</html>

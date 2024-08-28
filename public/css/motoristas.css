@@ -1,0 +1,136 @@
+/* Estilos Gerais */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: Arial, sans-serif;
+    background-color: #f0f2f5;
+    color: #333;
+}
+
+.container {
+    display: flex;
+    height: 100vh;
+    overflow: hidden;
+}
+
+/* Barra Lateral */
+.sidebar {
+    width: 250px;
+    background-color: #252424;
+    color: #ecf0f1;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    position: fixed;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    padding: 20px;
+}
+
+.sidebar-header h2 {
+    font-size: 18px;
+    margin-bottom: 10px;
+}
+
+.sidebar hr {
+    border: 0;
+    height: 1px;
+    background: #797878;
+    margin-bottom: 20px;
+}
+
+.sidebar-menu {
+    list-style: none;
+    padding: 0;
+    flex-grow: 1;
+}
+
+.sidebar-menu li {
+    margin-bottom: 15px;
+}
+
+.sidebar-menu a {
+    color: #ecf0f1;
+    text-decoration: none;
+    font-size: 16px;
+    display: block;
+    padding: 10px;
+    border-radius: 4px;
+    transition: background 0.3s;
+}
+
+.sidebar-menu a:hover {
+    background-color: #A6A6A6;
+}
+
+.sidebar-footer a {
+    color: #fcfcfc;
+    text-decoration: none;
+    font-size: 16px;
+    display: block;
+    text-align: center;
+    padding: 10px;
+    border-radius: 4px;
+    background-color: #FF261E;
+    transition: background 0.3s;
+}
+
+.sidebar-footer a:hover {
+    background-color: #e74c3c;
+}
+/* Estilo para o formulário de motoristas */
+form {
+    max-width: 600px; /* Ajusta a largura máxima do formulário */
+    margin: 0 auto; /* Centraliza o formulário na página */
+    padding: 20px; /* Adiciona padding interno ao formulário */
+    background-color: #fff; /* Define a cor de fundo do formulário */
+    border-radius: 8px; /* Adiciona bordas arredondadas ao formulário */
+    box-shadow: 3px 0px 4px 13px rgba(0, 0, 0, 0.1); /* Adiciona sombra ao formulário */
+    margin-top: 30px;
+}
+
+form label {
+    display: block; /* Faz o label ocupar toda a largura do grupo */
+    font-size: 16px; /* Define o tamanho da fonte do label */
+    margin-bottom: 8px; /* Espaçamento entre o label e o input */
+    color: #333; /* Define a cor do texto do label */
+}
+
+form input[type="text"],
+form input[type="tel"],
+form input[type="date"],
+form input[type="checkbox"] {
+    width: 100%; /* Faz o input ocupar toda a largura do formulário */
+    padding: 10px; /* Adiciona padding interno ao input */
+    border: 1px solid #ccc; /* Define a cor da borda do input */
+    border-radius: 4px; /* Adiciona bordas arredondadas ao input */
+    font-size: 16px; /* Define o tamanho da fonte do input */
+    color: #333; /* Define a cor do texto do input */
+    margin-bottom: 15px; /* Espaçamento entre os inputs */
+}
+
+form input[type="checkbox"] {
+    width: auto; /* Remove a largura do checkbox */
+    margin-right: 10px; /* Espaçamento entre o checkbox e o label */
+}
+
+form button {
+    padding: 10px 20px; /* Adiciona padding interno aos botões */
+    font-size: 16px; /* Define o tamanho da fonte dos botões */
+    color: #fff; /* Define a cor do texto dos botões */
+    background-color: #FF261E; /* Define a cor de fundo dos botões */
+    border: none; /* Remove a borda padrão dos botões */
+    border-radius: 4px; /* Adiciona bordas arredondadas aos botões */
+    cursor: pointer; /* Muda o cursor para pointer ao passar sobre o botão */
+    transition: background 0.3s; /* Adiciona uma transição suave na cor de fundo */
+    margin-right: 10px; /* Espaçamento entre os botões */
+}
+
+form button:hover {
+    background-color: #e74c3c; /* Muda a cor de fundo ao passar o mouse sobre o botão */
+}
