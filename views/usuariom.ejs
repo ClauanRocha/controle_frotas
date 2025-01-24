@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin - Frotas de Caminhão</title>
+    <link rel="stylesheet" href="/css/frota.css">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+</head>
+<body>
+    <div class="container">
+        <!-- Barra Lateral -->
+        <div class="sidebar">
+            <div class="sidebar-header">
+                <h2>Bem-vindo, <%= user.username %></h2>
+                <hr>
+            </div>
+            <ul class="sidebar-menu">
+                <li><a href="/frota" onclick="loadContent('/frota')">Inicio</a></li>
+                <li><a href="/frota/motoristas" onclick="loadContent('/frota/motoristas')">Cadastro de Motorista</a></li>
+                <li><a href="/frota/consmoto" onclick="loadContent('/frota/consmoto')">Consultar Motorista</a></li>
+                <li><a href="/frota/veiculos" onclick="loadContent('/frota/veiculos')">Cadastro de Veículo</a></li>
+                <li><a href="/frota/usuariom" onclick="loadContent('/frota/usuariom')">Cadastro de Usuário</a></li>
+            </ul>
+            <div class="sidebar-footer">
+                <a href="/logout">Sair</a>
+            </div>
+            <div class="footer">
+                <p><strong> Autoamerica Ltda</strong> 
+                <a href="https://chamados.autoamerica.com.br:8082/EquipeTI/index.html" target="_blank">
+                    <img src="img/logoticerta.png" alt="Logo Autoamerica" class="logo" width="20px">
+                </a>
+                </p>
+            </div> 
+        </div>
+    <!-- Conteúdo Principal -->
+    <div class="register-container">
+        <h1>Cadastro de Usuário</h1>
+        <form action="/register" method="POST">
+            <div class="input-group">
+                <label for="username">Nome de Usuário</label>
+                <input type="text" id="username" name="username" placeholder="Usuário" required>
+            </div>
+
+            <div class="input-group">
+                <label for="password">Senha</label>
+                <input type="password" id="password" name="password" placeholder="Senha" required>
+            </div>
+
+            <div class="input-group">
+                <label for="role">Função</label>
+                <select id="role" name="role" required>
+                    <option value="user">Usuário</option>
+                    <option value="admin">Administrador</option>
+                </select>
+            </div>
+
+            <button type="submit" class="btn">Cadastrar</button>
+        </form>
+    </main>
+</div>
+</body>
+</html>

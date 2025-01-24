@@ -14,12 +14,12 @@
     </div>
     <main>
         <form action="/checkout" method="POST">
-            <label for="placa_vec">Placa do Veículo:</label>
-            <input type="text" id="placa_vec" name="placa_vec" required>
+            <label for="vehicle">Placa do Veículo:</label>
+            <input type="text" id="vehicle" name="vehicle" required>
 
-            <label for="placa_enga">Placa do Engate:</label>
-            <input type="text" id="placa_enga" name="placa_enga">
-
+            <label for="placa_eng">Placa do Engate:</label>
+            <input type="text" id="placa_eng" name="placa_eng">
+ 
             <label for="km">KM:</label>
             <input type="number" id="km" name="km" required>
 
@@ -27,22 +27,22 @@
             <input type="datetime-local" id="date" name="date" required>
 
             <label for="pneu_est">Estado dos Pneus:</label>
-            <select class="select" id="pneu_est" name="pneu_est">
+            <select class="select" id="ds_categoria" name="ds_categoria">
                 <option value=" "> </option>
                 <option value="Otimo">Ótimo</option>
                 <option value="Bom Estado">Bom Estado</option>
                 <option value="Ruim">Ruim</option>
             </select>
 
-            <label for="oleo_est">Estado do Óleo:</label>
+            <label for="oleo_est">Estado dos Oleo:</label>
             <select class="select" id="oleo_est" name="oleo_est">
                 <option value=" "> </option>
-                <option value="No_Nivel">No Nível</option>
-                <option value="Abaixo_Nivel">Abaixo do Nível</option>
+                <option value="No_Nivel">No Nivel</option>
+                <option value="Abaixo_Nivel">Abaixo do Nivel</option>
                 <option value="Ruim">Ruim</option>
             </select>
 
-            <label for="lataria_est">Estado da Lataria:</label>
+            <label for="lataria_est">Estado dos Lataria:</label>
             <select class="select" id="lataria_est" name="lataria_est">
                 <option value=" "> </option>
                 <option value="Otimo">Ótimo</option>
@@ -50,7 +50,7 @@
                 <option value="Ruim">Ruim</option>
             </select>
 
-            <label for="extintor_est">Estado do Extintor:</label>
+            <label for="extintor_est">Estado dos Extintor:</label>
             <select class="select" id="extintor_est" name="extintor_est">
                 <option value=" "> </option>
                 <option value="Otimo">Ótimo</option>
@@ -58,7 +58,7 @@
                 <option value="Ruim">Ruim</option>
             </select>
 
-            <label for="luz_est">Estado das Luzes:</label>
+            <label for="luz_est">Estado dos Luz:</label>
             <select class="select" id="luz_est" name="luz_est">
                 <option value=" "> </option>
                 <option value="Otimo">Ótimo</option>
@@ -66,13 +66,12 @@
                 <option value="Ruim">Ruim</option>
             </select>
 
-            <label for="destino">Local:</label>
+            <label for="destino">Destino:</label>
             <input type="text" id="destino" name="destino" required>
 
             <label for="observacao">Observação:</label>
             <input type="text" id="observacao" name="observacao">
 
-            <input type="hidden" name="checkin_id" value="<%= checkin.id %>">
             <button type="submit">Registrar Check-Out</button>
             <button type="button" onclick="window.location.href='/home'">Voltar</button>
         </form>

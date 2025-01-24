@@ -124,7 +124,7 @@ body {
     max-height: 300px; /* Reduzido para ajustar melhor */
 }
 table th, table td {
-    padding: 16px; /* Ajuste de padding para diminuir o espaço entre as linhas */
+    padding: 25px; /* Ajuste de padding para diminuir o espaço entre as linhas */
     text-align: left;
     border-bottom: 0px solid rgba(255, 255, 255, 0.1); /* Linhas brancas com opacidade */
     width: 22%;

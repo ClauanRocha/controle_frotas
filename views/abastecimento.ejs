@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Check-in - Frotas de Caminhão</title>
+    <link rel="stylesheet" href="/css/checkin.css">
+</head>
+<body>
+    <div>
+        <h1>Abastecimento
+            <img width="64" height="64" src="https://img.icons8.com/external-xnimrodx-lineal-color-xnimrodx/64/external-fuel-station-ecology-and-energy-xnimrodx-lineal-color-xnimrodx.png" alt="Estação de Combustível"/>
+        </h1>
+    </div>
+    <main>
+        <form action="/abastecimento" method="POST" enctype="multipart/form-data">
+            <label for="veiculo">Veículo:</label>
+            <select id="veiculo" name="veiculo" required>
+                <option value="">Selecione um veículo</option>
+                <% veiculos.forEach(function(veiculo) { %>
+                    <option value="<%= veiculo.id %>">
+                        <%= veiculo.placa %> - <%= veiculo.modelo %>
+                    </option>
+                <% }); %>
+            </select>
+
+            <label for="odometro">Odômetro:</label>
+            <input type="text" id="odometro" name="odometro">
+
+            <label for="posto_combustivel">Posto de Combustível:</label>
+            <input type="text" id="posto_combustivel" name="posto_combustivel" required>
+
+            <label for="valor_litro">Valor do Litro:</label>
+            <input type="text" id="valor_litro" name="valor_litro" required>
+
+            <label for="quantidade_litros">Quantidade de litros:</label>
+            <input type="text" id="quantidade_litros" name="quantidade_litros" required>
+
+            <label for="numero_cupom">Número do Cupom:</label>
+            <input type="text" id="numero_cupom" name="numero_cupom" required>
+
+            <div class="button1">
+                <label for="cupom_foto">Anexo:</label>
+                <div id="arquivoContainer">
+                    <div id="arquivoSelecionado"></div>
+                    <button id="removerArquivoBtn" style="display: none;">x</button>
+                </div>
+                <input type="file" id="cupom_foto" name="cupom_foto" style="display: none;">
+                <label for="cupom_foto" id="selecionarArquivoLabel">Selecionar Arquivo
+                    <img width="26" height="26" src="https://img.icons8.com/external-goofy-solid-kerismaker/96/external-Clips-stationery-goofy-solid-kerismaker.png" alt="Anexar arquivo"/>
+                </label>
+            </div>
+
+            <button type="submit">Registrar Abastecimento</button>
+            <button type="button" onclick="window.location.href='/home'">Voltar</button> 
+        </form>
+    </main>
+    <div class="footer">
+        <p>2024 © Todos os direitos reservados <br>
+        <strong> Autoamerica Ltda</strong> 
+        <a href="https://chamados.autoamerica.com.br:8082/EquipeTI/index.html" target="_blank">
+            <img src="/img/logoticerta.png" alt="Logo Autoamerica" class="logo" width="20px">
+        </a>
+        </p>
+    </div> 
+</body>
+</html>

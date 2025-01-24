@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Editar Veículo</title>
+    <link rel="stylesheet" href="/path/to/your/css/file.css"> <!-- Inclua seu arquivo CSS -->
+</head>
+<body>
+    <h1>Editar Veículo</h1>
+
+    <form action="/frota/veiculos/editar/<%= veiculo.id %>" method="POST">
+        <div>
+            <label for="modelo">Modelo:</label>
+            <input type="text" id="modelo" name="modelo" value="<%= veiculo.modelo %>" required>
+        </div>
+        <div>
+            <label for="placa">Placa:</label>
+            <input type="text" id="placa" name="placa" value="<%= veiculo.placa %>" required>
+        </div>
+        <div>
+            <label for="ano">Ano:</label>
+            <input type="number" id="ano" name="ano" value="<%= veiculo.ano %>" required>
+        </div>
+        <div>
+            <label for="cor">Cor:</label>
+            <input type="text" id="cor" name="cor" value="<%= veiculo.cor %>" required>
+        </div>
+        <button type="submit">Salvar Alterações</button>
+    </form>
+
+    <a href="/frota/veiculos">Voltar para a lista de veículos</a>
+</body>
+</html>

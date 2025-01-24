@@ -9,6 +9,8 @@ body {
     font-family: Arial, sans-serif;
     background-color: #f0f2f5;
     color: #333;
+    height: 100vh;
+    overflow: hidden;
 }
 
 .container {
@@ -30,6 +32,7 @@ body {
     bottom: 0;
     left: 0;
     padding: 20px;
+    z-index: 10;
 }
 
 .sidebar-header h2 {
@@ -102,6 +105,34 @@ body {
     margin-bottom: 30px;
 }
 
+/* Estilo do Filtro de Veículos */
+.filter-vehicles {
+    margin-bottom: 20px;
+    padding: 15px;
+    background-color: #fff;
+    border-radius: 8px;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+}
+
+.filter-vehicles label {
+    font-size: 16px;
+    margin-right: 10px;
+    color: #333;
+}
+
+.filter-vehicles select {
+    padding: 8px 12px;
+    font-size: 16px;
+    border-radius: 4px;
+    border: 1px solid #ccc;
+    transition: border-color 0.3s;
+}
+
+.filter-vehicles select:focus {
+    border-color: #777;
+    outline: none;
+}
+
 /* Gráficos */
 .charts {
     display: grid;
@@ -121,5 +152,38 @@ body {
 
 .chart-box canvas {
     width: 100% !important;
-    max-height: 300px; /* Reduzido para ajustar melhor */
+    max-height: 300px; /* Ajusta a altura máxima dos gráficos */
+}
+
+/* Responsividade */
+@media (max-width: 768px) {
+    .main-content {
+        margin-left: 0;
+        width: 100%;
+        padding: 20px;
+    }
+
+    .charts {
+        grid-template-columns: 1fr; /* Um gráfico por linha em telas pequenas */
+    }
+
+    .sidebar {
+        width: 100%;
+        height: auto;
+        position: relative;
+    }
+
+    .sidebar-menu {
+        flex-direction: row;
+        justify-content: space-between;
+    }
+
+    .sidebar-menu li {
+        margin-bottom: 0;
+        margin-right: 15px;
+    }
+
+    .sidebar-footer {
+        margin-top: 10px;
+    }
 }

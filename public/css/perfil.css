@@ -15,6 +15,7 @@ body {
     padding: 20px;
     border-radius: 10px;
     width: 300px;
+    margin-top: 79px;
 }
 
 .profile-container h2 {
@@ -28,17 +29,20 @@ body {
 }
 
 .profile-container input[type="text"],
-.profile-container input[type="password"] {
-    width: 100%;
+.profile-container input[type="password"],
+.profile-container input[type="date"] {
+    width: 93%;
     padding: 10px;
     margin-bottom: 15px;
     border: none;
     border-radius: 5px;
+    background-color: #fff;
+    color: #000;
 }
 
 .profile-container button {
     display: block;
-    width: 200px;
+    width: 100%;
     padding: 10px;
     margin: 10px 0;
     background-color: #FF261E;
@@ -72,4 +76,19 @@ body {
 
 .footer a:hover {
     text-decoration: underline;
+}
+
+.password-container {
+    position: relative;
+    display: inline-block;
+    width: 93%;
+}
+
+#togglePassword {
+    position: absolute;
+    right: 10px;
+    top: 50%;
+    transform: translateY(-50%);
+    cursor: pointer;
+    color: #000;
 }

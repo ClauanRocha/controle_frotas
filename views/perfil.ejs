@@ -4,7 +4,9 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Perfil - Frotas de Caminhão</title>
-    <link rel="stylesheet" href="/css/perfil.css">
+    <link rel="stylesheet" href="/css/perfil.css"> 
+    <!-- Link para o Font Awesome para os ícones -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
 </head>
 <body>
     <div class="profile-container">
@@ -20,7 +22,10 @@
             <input type="text" id="numcnh" name="numcnh" value="<%= user.numcnh %>" required>
 
             <label for="password">Nova Senha</label>
-            <input type="password" id="password" name="password" placeholder="Digite a nova senha">
+            <div class="password-container">
+                <input type="password" id="password" name="password" placeholder="Digite a nova senha">
+                <i class="far fa-eye" id="togglePassword"></i>
+            </div>
 
             <button type="submit">Atualizar Perfil</button>
         </form>
@@ -35,5 +40,21 @@
         </a>
         </p>
     </div>
+
+    <!-- Script para alternar a visualização da senha -->
+    <script>
+        const togglePassword = document.querySelector('#togglePassword');
+        const password = document.querySelector('#password');
+
+        togglePassword.addEventListener('click', function () {
+            // Alternar o tipo de input entre 'password' e 'text'
+            const type = password.getAttribute('type') === 'password' ? 'text' : 'password';
+            password.setAttribute('type', type);
+            
+            // Alternar o ícone entre olho aberto e fechado
+            this.classList.toggle('fa-eye-slash');
+        });
+    </script>
+
 </body>
 </html>

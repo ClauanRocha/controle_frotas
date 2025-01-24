@@ -190,3 +190,74 @@ td.status {
 td.status.closed {
     color: #2ecc71; /* Cor do texto para status "Fechado" */
 }
+
+/* Estilos para dispositivos móveis */
+@media only screen and (max-width: 768px) {
+    /* Ajustes gerais */
+    body {
+        padding: 0 10px;
+    }
+    
+    /* Conteúdo */
+    .container {
+        padding: 10px;
+    }
+
+    /* Cabeçalho */
+    .header {
+        flex-direction: column;
+        padding: 10px;
+        text-align: center;
+    }
+
+    .user-info h2 {
+        font-size: 16px;
+    }
+
+    .user-actions button {
+        font-size: 14px;
+        padding: 8px 15px;
+        margin-left: 0;
+        margin-top: 10px;
+    }
+
+    /* Menu */
+    .menu {
+        flex-direction: column;
+        margin: 10px 0;
+    }
+
+    .menu button {
+        font-size: 16px;
+        padding: 10px 20px;
+        margin: 5px 0;
+    }
+
+    /* Conteúdo Principal */
+    .content {
+        padding: 20px;
+        grid-template-columns: 1fr; /* Colunas em tela cheia */
+        gap: 10px;
+    }
+
+    /* Seções do Conteúdo */
+    .checkins h3, .indicators h3, .notifications h3 {
+        font-size: 18px;
+    }
+
+    .checkins li, .indicator h4, .notification p {
+        font-size: 14px;
+    }
+
+    /* Rodapé */
+    .footer {
+        font-size: 12px;
+        padding: 10px;
+    }
+
+    /* Tabela */
+    table th, table td {
+        padding: 8px;
+        font-size: 14px;
+    }
+}

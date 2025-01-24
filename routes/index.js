@@ -1,5 +1,20 @@
 const express = require('express');
 const router = express.Router();
+const multer = require('multer');
+const path = require('path');
+
+// Configurando o armazenamento do multer
+const storage = multer.diskStorage({
+    destination: function (req, file, cb) {
+        cb(null, 'uploads/'); // Define o diretório onde os arquivos serão armazenados
+    },
+    filename: function (req, file, cb) {
+        cb(null, Date.now() + path.extname(file.originalname)); // Define o nome do arquivo
+    }
+});
+
+// Criando a constante upload usando a configuração do storage
+const upload = multer({ storage: storage });
 
 module.exports = (db) => {
 
@@ -172,12 +187,12 @@ module.exports = (db) => {
             return res.status(401).send('Usuário não autenticado.');
         }
 
-        const { vehicle, km, date, pneu_est, placa_vec, placa_enga, oleo_est, lataria_est, extintor_est, luz_est, destino, observacao } = req.body;
+        const { vehicle, km, date, pneu_est, placa_enga, oleo_est, lataria_est, extintor_est, luz_est, destino, observacao } = req.body;
         const userId = req.session.user.id;
 
-        const checkinQuery = 'INSERT INTO check_ins (user_id, vehicle, km, checkin_date, pneu_est, status, placa_vec, placa_enga, oleo_est, lataria_est, extintor_est, luz_est, destino, observacao) VALUES (?, ?, ?, ?, ?, 1, ?, ?, ?, ?, ?, ?, ?, ?)';
+        const checkinQuery = 'INSERT INTO check_ins (user_id, vehicle, km, checkin_date, pneu_est, status, placa_enga, oleo_est, lataria_est, extintor_est, luz_est, destino, observacao) VALUES (?, ?, ?, ?, ?, 1, ?, ?, ?, ?, ?, ?, ?)';
 
-        db.query(checkinQuery, [userId, vehicle, km, date, pneu_est, placa_vec, placa_enga, oleo_est, lataria_est, extintor_est, luz_est, destino, observacao], (err, results) => {
+        db.query(checkinQuery, [userId, vehicle, km, date, pneu_est, placa_enga, oleo_est, lataria_est, extintor_est, luz_est, destino, observacao], (err, results) => {
             if (err) {
                 console.error('Erro ao registrar o check-in:', err);
                 return res.status(500).send('Erro no servidor. Tente novamente mais tarde.');
@@ -197,37 +212,21 @@ module.exports = (db) => {
             return res.status(401).send('Usuário não autenticado.');
         }
     
-        const { vehicle, km, date, pneu_est, checkin_id, placa_vec, placa_enga, oleo_est, lataria_est, extintor_est, luz_est, destino, observacao } = req.body;
+        const { vehicle, km, date, pneu_est, placa_eng, oleo_est, lataria_est, extintor_est, luz_est, destino, observacao } = req.body; 
         const userId = req.session.user.id;
     
-        console.log('Dados recebidos para check-out:', { vehicle, km, date, pneu_est, checkin_id });
+        console.log('Dados recebidos para check-out:', { vehicle, km, date, pneu_est });
     
-        if (!checkin_id) {
-            return res.status(400).send('ID do check-in não fornecido.');
-        }
+        const checkoutQuery = 'INSERT INTO check_outs (user_id, vehicle, km, checkout_date, pneu_est, placa_eng, oleo_est, lataria_est, extintor_est, luz_est, destino, observacao) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)';
     
-        const updateCheckinQuery = 'UPDATE check_ins SET status = 0 WHERE id = ?';
-    
-        db.query(updateCheckinQuery, [checkin_id], (err, results) => {
+        db.query(checkoutQuery, [userId, vehicle, km, date, pneu_est, placa_eng, oleo_est, lataria_est, extintor_est, luz_est, destino, observacao], (err, results) => {
             if (err) {
-                console.error('Erro ao atualizar o check-in:', err);
+                console.error('Erro ao registrar o check-out:', err);
                 return res.status(500).send('Erro no servidor. Tente novamente mais tarde.');
             }
     
-            console.log('Check-in atualizado com sucesso:', results);
-    
-            const checkoutQuery = 'INSERT INTO check_outs (user_id, vehicle, km, checkout_date, pneu_est, placa_vec, placa_enga, oleo_est, lataria_est, extintor_est, luz_est, destino, observacao) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)';
-    
-            db.query(checkoutQuery, [userId, vehicle, km, date, pneu_est, placa_vec, placa_enga, oleo_est, lataria_est, extintor_est, luz_est, destino, observacao], (err, results) => {
-                if (err) {
-                    console.error('Erro ao registrar o check-out:', err);
-                    return res.status(500).send('Erro no servidor. Tente novamente mais tarde.');
-                }
-    
-                console.log('Check-out registrado com sucesso:', results);
-    
-                res.redirect('/checkout-success');
-            });
+            console.log('Check-out registrado com sucesso:', results);
+            res.redirect('/checkin-success');
         });
     });
     
@@ -258,7 +257,7 @@ module.exports = (db) => {
             }
         });
     });
-    
+
     // Rota para cadastrar novos veículos
     router.post('/frota/veiculos', (req, res) => {
         const { modelo, placa, ano, cor } = req.body;
@@ -282,55 +281,154 @@ module.exports = (db) => {
         res.render('checkout', { title: 'Check-out' });
     });
     
-    router.get('/abastecimento', (req, res) => {
-        res.render('abastecimento', { title: 'Abastecimento' });
-    });
-    
     // Rota para a página de motoristas na frota
-router.get('/frota/motoristas', (req, res) => {
-    if (!req.session.user) {
-        return res.redirect('/login'); // Redireciona para login se o usuário não estiver logado
-    }
-
-    // Consulta para obter os motoristas cadastrados
-    const query = 'SELECT * FROM motoristas';
-    db.query(query, (err, results) => {
-        if (err) {
-            console.error('Erro ao consultar motoristas:', err);
-            res.send('Erro no servidor. Tente novamente mais tarde.');
-        } else {
-            res.render('motoristas', { user: req.session.user, motoristas: results });
+    router.get('/frota/motoristas', (req, res) => {
+        if (!req.session.user) {
+            return res.redirect('/login'); // Redireciona para login se o usuário não estiver logado
         }
+
+        // Consulta para obter os motoristas cadastrados
+        const query = 'SELECT * FROM motoristas';
+        db.query(query, (err, results) => {
+            if (err) {
+                console.error('Erro ao consultar motoristas:', err);
+                res.send('Erro no servidor. Tente novamente mais tarde.');
+            } else {
+                res.render('motoristas', { user: req.session.user, motoristas: results });
+            }
+        });
     });
-});
 
-// Rota para cadastrar novos motoristas
-router.post('/frota/motoristas', (req, res) => {
-    const {
-        moto_nome,
-        moto_tel,
-        moto_nasc,
-        moto_cnh,
-        moto_antcri,
-        moto_ear,
-        placa_vec,
-        moto_traj
-    } = req.body;
+    // Rota para cadastrar novos motoristas
+    router.post('/motoristas', (req, res) => {
+        const {
+            moto_nome,
+            moto_tel,
+            moto_nasc,
+            moto_cnh,
+            moto_antcri,
+            moto_ear,
+            moto_traj
+        } = req.body;
 
-    const query = `
-        INSERT INTO motoristas (moto_nome, moto_tel, moto_nasc, moto_cnh, moto_antcri, moto_ear, placa_vec, moto_traj)
-        VALUES (?, ?, ?, ?, ?, ?, ?, ?)
-    `;
-    db.query(query, [moto_nome, moto_tel, moto_nasc, moto_cnh, moto_antcri, moto_ear, placa_vec, moto_traj], (err, results) => {
-        if (err) {
-            console.error('Erro ao cadastrar motorista:', err);
-            res.send('Erro no servidor. Tente novamente mais tarde.');
-        } else {
-            res.redirect('/frota/motoristas'); // Redireciona para a lista de motoristas após o cadastro
+        const query = `
+            INSERT INTO motoristas (moto_nome, moto_tel, moto_nasc, moto_cnh, moto_antcri, moto_ear, moto_traj)
+            VALUES (?, ?, ?, ?, ?, ?, ?, ?)
+        `;
+        db.query(query, [moto_nome, moto_tel, moto_nasc, moto_cnh, moto_antcri, moto_ear, moto_traj], (err, results) => {
+            if (err) {
+                console.error('Erro ao cadastrar motorista:', err);
+                res.send('Erro no servidor. Tente novamente mais tarde.');
+            } else {
+                res.redirect('/motoristas'); // Redireciona para a lista de motoristas após o cadastro
+            }
+        });
+    });
+
+    // Rota para processar o abastecimento
+    router.post('/abastecimento', upload.single('cupom_foto'), (req, res) => {
+        if (!req.session.user) {
+            return res.redirect('/login');
         }
-    });
-});
 
+        const { veiculo, odometro, posto_combustivel, valor_litro, quantidade_litros, numero_cupom } = req.body;
+        const userId = req.session.user.id;
+        const cupomFoto = req.file ? req.file.filename : null; // Nome do arquivo salvo
+
+        const abastecimentoQuery = `
+            INSERT INTO abastecimento (user_id, veiculo, odometro, posto_combustivel, valor_litro, quantidade_litros, numero_cupom, cupom_foto)
+            VALUES (?, ?, ?, ?, ?, ?, ?, ?)
+        `;
+
+        db.query(abastecimentoQuery, [userId, veiculo, odometro, posto_combustivel, valor_litro, quantidade_litros, numero_cupom, cupomFoto], (err, results) => {
+            if (err) {
+                console.error('Erro ao registrar abastecimento:', err);
+                return res.status(500).send('Erro no servidor. Tente novamente mais tarde.');
+            }
+
+            res.redirect('/checkin-success');
+        });
+    });
+
+    // Rota para a página de abastecimento
+    router.get('/abastecimento', (req, res) => {
+        if (!req.session.user) {
+            return res.redirect('/login');
+        }
+
+        // Aqui você deve buscar os veículos no banco de dados
+        const query = 'SELECT id, placa, modelo FROM veiculos';
+
+        db.query(query, (err, veiculos) => {
+            if (err) {
+                console.error('Erro ao buscar veículos:', err);
+                return res.status(500).send('Erro no servidor.');
+            }
+
+            // Renderize a página passando a lista de veículos
+            res.render('abastecimento', { 
+                title: 'Abastecimento - Frotas de Caminhão', 
+                veiculos: veiculos // Passe os veículos aqui
+            });
+        });
+    }); 
+
+    // Rota de sucesso para abastecimento
+    router.get('/abastecimento-success', (req, res) => {
+        res.render('registro-sucesso', { 
+            titulo: 'Abastecimento Realizado com Sucesso', 
+            mensagem: 'O seu registro de abastecimento foi efetuado com sucesso.'
+        });
+    });
+
+    // Rota de sucesso para check-in
+    router.get('/checkin-success', (req, res) => {
+        res.render('registro-sucesso', { 
+            titulo: 'Check-in Realizado com Sucesso', 
+            mensagem: 'O seu check-in foi efetuado com sucesso.'
+        });
+    });
+
+    // Rota de sucesso para checkout
+    router.get('/checkout-success', (req, res) => {
+        res.render('registro-sucesso', { 
+            titulo: 'Checkout Realizado com Sucesso', 
+            mensagem: 'O seu checkout foi efetuado com sucesso.'
+        });
+    });
+
+    // Rota para editar informações de um veículo
+    router.post('/frota/veiculos/editar/:id', (req, res) => {
+        const { id } = req.params;
+        const { modelo, placa, ano, cor } = req.body;
+
+        const query = 'UPDATE veiculos SET modelo = ?, placa = ?, ano = ?, cor = ? WHERE id = ?';
+        
+        db.query(query, [modelo, placa, ano, cor, id], (err, results) => {
+            if (err) {
+                console.error('Erro ao atualizar o veículo:', err);
+                res.status(500).send('Erro no servidor ao atualizar o veículo. Tente novamente mais tarde.');
+            } else {
+                res.redirect('/frota/veiculos'); // Redireciona para a lista de veículos após a edição
+            }
+        });
+    });
+
+    // Rota para excluir um veículo
+    router.post('/frota/veiculos/excluir/:id', (req, res) => {
+        const { id } = req.params;
+
+        const query = 'DELETE FROM veiculos WHERE id = ?';
+
+        db.query(query, [id], (err, results) => {
+            if (err) {
+                console.error('Erro ao excluir o veículo:', err);
+                res.status(500).send('Erro no servidor ao excluir o veículo. Tente novamente mais tarde.');
+            } else {
+                res.redirect('/frota/veiculos'); // Redireciona para a lista de veículos após a exclusão
+            }
+        });
+    });
 
     return router;
 };

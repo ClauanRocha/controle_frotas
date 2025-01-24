@@ -83,6 +83,18 @@ body {
 .sidebar-footer a:hover {
     background-color: #e74c3c;
 }
+
+/* Logo na barra lateral */
+.logo-container {
+    text-align: center; /* Centraliza a imagem na barra lateral */
+    margin-top: 20px; /* Espaço acima da imagem */
+}
+
+.logo {
+    width: 100px; /* Ajuste o tamanho da logo conforme necessário */
+    height: auto;
+}
+
 /* Estilo para o formulário de motoristas */
 form {
     max-width: 600px; /* Ajusta a largura máxima do formulário */

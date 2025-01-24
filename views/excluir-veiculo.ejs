@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Excluir Veículo</title>
+    <link rel="stylesheet" href="/path/to/your/css/file.css"> <!-- Inclua seu arquivo CSS -->
+</head>
+<body>
+    <h1>Excluir Veículo</h1>
+
+    <p>Tem certeza de que deseja excluir o veículo <strong><%= veiculo.modelo %> (Placa: <%= veiculo.placa %>)</strong>?</p>
+
+    <form action="/frota/veiculos/excluir/<%= veiculo.id %>" method="POST">
+        <button type="submit">Sim, excluir</button>
+        <a href="/frota/veiculos">Cancelar</a>
+    </form>
+</body>
+</html>
